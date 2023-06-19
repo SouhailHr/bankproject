@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Deposit History{% endblock %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<h1>Deposit History</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Deposit ID</th>
+                <th>Account</th>
+                <th>Amount</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for deposit in deposits %}
+                <tr>
+                    <td>{{ deposit.id }}</td>
+                    <td>{{ deposit.account }}</td>
+                    <td>{{ deposit.amount }}</td>
+                    <td>{{ deposit.date }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

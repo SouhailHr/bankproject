@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block title %}Transaction History Download{% endblock %}
+
+{% block content %}
+<h1>Account History</h1>
+
+<br>
+
+<h2>Transaction History</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Transaction ID</th>
+      <th>Sender</th>
+      <th>Receiver</th>
+      <th>Amount</th>
+      <th>Sending Date</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for transaction in transactions %}
+    <tr>
+        <td>{{ transaction.pk }}</td>
+        <td>{{ transaction.sender }}</td>
+        <td>{{ transaction.receiver }}</td>
+        <td style="color:
+            {% if transaction.sender.user == request.user and transaction.receiver.user == request.user %}
+                blue;
+            {% elif transaction.sender.user == request.user %}
+                red;
+            {% elif transaction.receiver.user == request.user %}
+                green;
+            {% endif %}">
+            {% if transaction.sender.user == request.user and transaction.receiver.user == request.user %}
+                <->{{ transaction.amount }}
+            {% elif transaction.sender.user == request.user %}
+                -{{ transaction.amount }}
+            {% elif transaction.receiver.user == request.user %}
+                +{{ transaction.amount }}
+            {% endif %}
+        </td>
+        <td>{{ transaction.date }}</td>
+
+        <td>{{ transaction.status }}</td>
+    </tr>
+{% endfor %}
+
+  </tbody>
+</table>
+
+<h2>Deposit History</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Deposit ID</th>
+                <th>Account</th>
+                <th>Amount</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for deposit in deposits %}
+                <tr>
+                    <td>{{ deposit.id }}</td>
+                    <td>{{ deposit.account }}</td>
+                    <td style="color:green">+{{ deposit.amount }}</td>
+                    <td>{{ deposit.date }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}User Details{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="left-section">
+    <div class="profile-picture">
+      {% if user.profile_picture %}
+        <img class="profile-image" src="{{ user.profile_picture.url }}" alt="Profile Picture">
+      {% else %}
+        <p class="no-picture">No profile picture available</p>
+      {% endif %}
+    </div>
+    <div class="user-information">
+      <h1>User Details</h1>
+      <p>Username: {{ user.username }}</p>
+      <p>First Name: {{ user.first_name }}</p>
+      <p>Last Name: {{ user.last_name }}</p>
+      <p>Email: {{ user.email }}</p>
+      <p>Address: {{ user.address }}</p>
+      <p>Phone Number: {{ user.phone_number }}</p>
+        <button>
+          <a href="{% url 'users:user_update' user.pk %}" >Update Account</a>
+        </button>
+        <button>
+          <a href="{% url 'users:delete' user.pk %}" >Delete Account</a>
+        </button>
+    </div>
+    <div></div>
+  </div>
+</div>
+
+{% endblock %}

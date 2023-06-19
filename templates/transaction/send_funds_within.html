@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Send Funds - Between Accounts{% endblock %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<h1>Send Funds - Between Accounts </h1>
+<form method="post">
+  {% csrf_token %}
+  {{ form }}
+  <button type="submit">Send</button>
+</form>
+{% endblock %}

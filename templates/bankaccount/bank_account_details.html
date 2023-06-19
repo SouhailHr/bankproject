@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}Bank Account Details{% endblock %}
+
+{% block content %}
+  <h1>Bank Account Details</h1>
+  {% if bank_accounts %}
+    <ul>
+      {% for account in bank_accounts %}
+        <li>
+          <strong>Account ID:</strong> {{ account.uid }}<br>
+          <strong>Balance:</strong> ${{ account.balance }}<br>
+          <strong>Account Type:</strong> {{ account.get_account_type_display }}
+        </li>
+
+        <br>
+        <br>
+        <br>
+      {% endfor %}
+    </ul>
+          <a href="{% url 'create_bank_account'  %}" class="my-button">Create New Bank account</a>
+          <a href="{% url 'transaction_history'  %}" class="my-button">History</a>
+          <a href="{% url 'deposit_funds'  %}" class="my-button">Deposit</a>
+         {% if bank_accounts|length > 1 %}
+            <a href="{% url 'send_funds_within' %}" class="my-button">Send Between Accounts</a>
+        {% endif %}
+          <a href="{% url 'send_funds_out' %}" class="my-button">Send</a>
+  {% else %}
+    <p>No bank accounts found.</p>
+    <a href="{% url 'create_bank_account'  %}" class="my-button">Create New Bank account</a>
+
+  {% endif %}
+{% endblock %}
+
+

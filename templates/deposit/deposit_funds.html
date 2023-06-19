@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Deposit Funds{% endblock %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<h1>Deposit Funds</h1>
+<form method="post">
+  {% csrf_token %}
+  {{ form }}
+  <button type="submit">Deposit</button>
+</form>
+{% endblock %}

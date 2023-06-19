@@ -1,0 +1,39 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Bank App</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+
+    </style>
+</head>
+<body>
+    <nav>
+                <!--Profile-->
+        {# URL provided by django-allauth/account/urls.py #}
+        <ul>
+            <li><a href="{% url 'home'%}" >Home</a></li>
+            {% if request.user.is_authenticated %}
+            <li><a href="{% url 'users:detail' request.user.username  %}" >My Personal Information</a></li>
+            <li><a href="{% url 'bank_account_details'%}" >My Banking Information</a></li>
+            <li><a href="{% url 'account_logout' %}">Logout</a></li>
+            {% else %}
+            <li><a href="{% url 'account_login' %}">Sign In</a></li>
+            <li><a href="{% url 'users:register' %}">Sign Up</a></li>
+            {% endif %}
+
+        </ul>
+    </nav>
+
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <footer>
+        &copy; 2023 Your Bank App. All rights reserved.
+    </footer>
+</body>
+</html>
